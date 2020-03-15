@@ -25,7 +25,7 @@ import org.opengis.referencing.cs.AffineCS;
 import org.opengis.referencing.cs.AxisDirection;
 import org.opengis.referencing.cs.CoordinateSystemAxis;
 import si.uom.SI;
-import tec.uom.se.AbstractUnit;
+import tech.units.indriya.AbstractUnit;
 
 /**
  * A two- or three-dimensional coordinate system with straight axes that are not necessarily
@@ -137,9 +137,9 @@ public class DefaultAffineCS extends AbstractCS implements AffineCS {
     }
 
     /**
-     * Returns {@code true} if the specified unit is compatible with {@linkplain SI#METER meters}.
-     * In addition, this method also accepts {@link Unit#ONE}, which is used for coordinates in a
-     * grid. This method is invoked at construction time for checking units compatibility.
+     * Returns {@code true} if the specified unit is compatible with {@linkplain SI#METRE meters}.
+     * In addition, this method also accepts {@link AbstractUnit#ONE}, which is used for coordinates
+     * in a grid. This method is invoked at construction time for checking units compatibility.
      *
      * @since 2.2
      */

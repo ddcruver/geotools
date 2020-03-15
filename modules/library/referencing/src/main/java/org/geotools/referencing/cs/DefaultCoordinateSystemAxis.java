@@ -43,7 +43,7 @@ import org.opengis.referencing.cs.RangeMeaning;
 import org.opengis.util.InternationalString;
 import si.uom.NonSI;
 import si.uom.SI;
-import tec.uom.se.AbstractUnit;
+import tech.units.indriya.AbstractUnit;
 
 /**
  * Definition of a coordinate system axis. This is used to label axes, and indicate the orientation.
@@ -384,7 +384,7 @@ public class DefaultCoordinateSystemAxis extends AbstractIdentifiedObject
      * org.opengis.referencing.crs.GeocentricCRS geocentric CRS} using {@linkplain
      * org.opengis.referencing.cs.CartesianCS cartesian CS}.
      *
-     * <p>Increasing ordinates values go toward prime meridian and units are {@linkplain SI#METER
+     * <p>Increasing ordinates values go toward prime meridian and units are {@linkplain SI#METRE
      * metres}.
      *
      * <p>The ISO 19111 name is "<cite>geocentric X</cite>" and the abbreviation is upper case
@@ -403,7 +403,7 @@ public class DefaultCoordinateSystemAxis extends AbstractIdentifiedObject
      * org.opengis.referencing.cs.CartesianCS cartesian CS}.
      *
      * <p>Increasing ordinates values go {@linkplain AxisDirection#EAST East} and units are
-     * {@linkplain SI#METER metres}.
+     * {@linkplain SI#METRE metres}.
      *
      * <p>The ISO 19111 name is "<cite>geocentric Y</cite>" and the abbreviation is upper case
      * "<var>Y</var>".
@@ -421,7 +421,7 @@ public class DefaultCoordinateSystemAxis extends AbstractIdentifiedObject
      * org.opengis.referencing.cs.CartesianCS cartesian CS}.
      *
      * <p>Increasing ordinates values go {@linkplain AxisDirection#NORTH North} and units are
-     * {@linkplain SI#METER metres}.
+     * {@linkplain SI#METRE metres}.
      *
      * <p>The ISO 19111 name is "<cite>geocentric Z</cite>" and the abbreviation is upper case
      * "<var>Z</var>".
@@ -438,7 +438,7 @@ public class DefaultCoordinateSystemAxis extends AbstractIdentifiedObject
      * org.opengis.referencing.crs.ProjectedCRS projected CRS}.
      *
      * <p>Increasing ordinates values go {@linkplain AxisDirection#EAST East} and units are
-     * {@linkplain SI#METER metres}.
+     * {@linkplain SI#METRE metres}.
      *
      * <p>The ISO 19111 name is "<cite>easting</cite>" and the abbreviation is upper case
      * "<var>E</var>".
@@ -458,7 +458,7 @@ public class DefaultCoordinateSystemAxis extends AbstractIdentifiedObject
      * org.opengis.referencing.crs.ProjectedCRS projected CRS}.
      *
      * <p>Increasing ordinates values go {@linkplain AxisDirection#WEST West} and units are
-     * {@linkplain SI#METER metres}.
+     * {@linkplain SI#METRE metres}.
      *
      * <p>The ISO 19111 name is "<cite>westing</cite>" and the abbreviation is upper case
      * "<var>W</var>".
@@ -481,7 +481,7 @@ public class DefaultCoordinateSystemAxis extends AbstractIdentifiedObject
      * org.opengis.referencing.crs.ProjectedCRS projected CRS}.
      *
      * <p>Increasing ordinates values go {@linkplain AxisDirection#NORTH North} and units are
-     * {@linkplain SI#METER metres}.
+     * {@linkplain SI#METRE metres}.
      *
      * <p>The ISO 19111 name is "<cite>northing</cite>" and the abbreviation is upper case
      * "<var>N</var>".
@@ -501,7 +501,7 @@ public class DefaultCoordinateSystemAxis extends AbstractIdentifiedObject
      * org.opengis.referencing.crs.ProjectedCRS projected CRS}.
      *
      * <p>Increasing ordinates values go {@linkplain AxisDirection#SOUTH South} and units are
-     * {@linkplain SI#METER metres}.
+     * {@linkplain SI#METRE metres}.
      *
      * <p>The ISO 19111 name is "<cite>southing</cite>" and the abbreviation is upper case
      * "<var>S</var>".

@@ -28,15 +28,16 @@ import javax.measure.quantity.Dimensionless;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 import org.geotools.referencing.wkt.DefaultUnitParser;
+import org.geotools.util.GeoToolsUnitFormat;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-import tec.uom.se.unit.TransformedUnit;
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.format.SimpleUnitFormat;
+import tech.units.indriya.unit.TransformedUnit;
 
 /**
- * A set of units to use in addition of {@link SI} and {@link NonSI}.
+ * A set of units to use in addition of {@link si.uom.SI} and {@link si.uom.NonSI}.
  *
  * @since 2.1
  * @version $Id$
@@ -178,6 +179,8 @@ public final class Units {
                     && unit2 instanceof TransformedUnit<?>) {
                 TransformedUnit<?> tunit1 = (TransformedUnit<?>) unit1;
                 TransformedUnit<?> tunit2 = (TransformedUnit<?>) unit2;
+
+                // return tunit1.isEquivalentTo((Unit<?>) tunit2);
                 if (unit1.getSystemUnit().equals(unit2.getSystemUnit())) {
                     try {
                         float factor =

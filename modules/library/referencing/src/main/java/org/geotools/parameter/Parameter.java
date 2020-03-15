@@ -38,7 +38,7 @@ import org.opengis.parameter.ParameterValue;
 import org.opengis.util.CodeList;
 import si.uom.NonSI;
 import si.uom.SI;
-import tec.uom.se.AbstractUnit;
+import tech.units.indriya.AbstractUnit;
 
 /**
  * A parameter value used by an operation method. Most CRS parameter values are numeric, but other

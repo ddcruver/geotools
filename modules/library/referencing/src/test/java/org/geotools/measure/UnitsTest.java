@@ -36,8 +36,8 @@ import org.junit.Test;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-import tec.uom.se.function.MultiplyConverter;
-import tec.uom.se.unit.TransformedUnit;
+import tech.units.indriya.function.MultiplyConverter;
+import tech.units.indriya.unit.TransformedUnit;
 
 /**
  * Test conversions using the units declared in {@link Units}.
@@ -105,26 +105,25 @@ public class UnitsTest {
     public void testUnitsMatch() {
         Unit<Angle> degree =
                 Units.autoCorrect(
-                        new TransformedUnit<Angle>(
-                                SI.RADIAN, new MultiplyConverter((Math.PI * 2.0) / 360.0)));
+                        new TransformedUnit<>(
+                                SI.RADIAN, MultiplyConverter.of((Math.PI * 2.0) / 360.0)));
         assertEquals("autocorrection of degree definition from jsr275", NonSI.DEGREE_ANGLE, degree);
-        assertTrue("jsr275 deegree definition", isDegreeAngle(degree));
+        assertTrue("jsr275 degree definition", isDegreeAngle(degree));
 
         // UNIT["degree", 0.017453292519943295],
         degree =
                 Units.autoCorrect(
-                        new TransformedUnit<Angle>(
-                                SI.RADIAN, new MultiplyConverter(0.017453292519943295)));
+                        new TransformedUnit<>(
+                                SI.RADIAN, MultiplyConverter.of(0.017453292519943295)));
         assertEquals(
-                "autocorrection of deegree definition from EsriLookupTest",
+                "autocorrection of degree definition from EsriLookupTest",
                 NonSI.DEGREE_ANGLE,
                 degree);
         assertTrue("deegree definition from EsriLookupTest", isDegreeAngle(degree));
 
         Unit<Length> feet =
                 Units.autoCorrect(
-                        new TransformedUnit<Length>(
-                                SI.METRE, new MultiplyConverter(0.3048006096012192)));
+                        new TransformedUnit<>(SI.METRE, MultiplyConverter.of(0.3048006096012192)));
         assertEquals(
                 "autocorrection of US Survey definition from EsriLookupTest",
                 USCustomary.FOOT_SURVEY,
@@ -146,7 +145,7 @@ public class UnitsTest {
             UnitConverter converter = transformed.getConverter();
             if (converter instanceof MultiplyConverter) {
                 MultiplyConverter multiplyConverter = (MultiplyConverter) converter;
-                double factor = multiplyConverter.getFactor();
+                double factor = multiplyConverter.getFactor().doubleValue();
                 // 0.3048006096012192  // observed
                 // 0.3048006096        // expected
                 if (Math.abs(US_SURVEY_FOOT_FACTORY - factor) < US_SURVEY_FOOT_COMPARISON_EPSILON) {
@@ -176,7 +175,7 @@ public class UnitsTest {
             UnitConverter converter = transformed.getConverter();
             if (converter instanceof MultiplyConverter) {
                 MultiplyConverter multiplyConverter = (MultiplyConverter) converter;
-                double factor = multiplyConverter.getFactor();
+                double factor = multiplyConverter.getFactor().doubleValue();
                 if (Math.abs(RADIAN_TO_DEGREE_RATIO - factor) < DEEGREE_RATIO_COMPARISON_EPSILON) {
                     return true;
                 }

@@ -55,14 +55,14 @@ import java.util.Map;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.format.UnitFormat;
-import tec.uom.se.format.SimpleUnitFormat;
-import tec.uom.se.function.AddConverter;
-import tec.uom.se.function.MultiplyConverter;
-import tec.uom.se.function.RationalConverter;
-import tec.uom.se.unit.AlternateUnit;
-import tec.uom.se.unit.BaseUnit;
-import tec.uom.se.unit.ProductUnit;
-import tec.uom.se.unit.TransformedUnit;
+import tech.units.indriya.format.SimpleUnitFormat;
+import tech.units.indriya.function.AddConverter;
+import tech.units.indriya.function.MultiplyConverter;
+import tech.units.indriya.function.RationalConverter;
+import tech.units.indriya.unit.AlternateUnit;
+import tech.units.indriya.unit.BaseUnit;
+import tech.units.indriya.unit.ProductUnit;
+import tech.units.indriya.unit.TransformedUnit;
 
 /**
  * Base class extending UOM SimpleUnitFormat that provides the same setup as {@link
@@ -191,8 +191,8 @@ public abstract class GeoToolsUnitFormat extends SimpleUnitFormat {
             // Searches label database.
             String label = unitToName.get(unit);
             if (label != null) return label;
-            if (unit instanceof BaseUnit) return ((BaseUnit<?>) unit).getSymbol();
-            if (unit instanceof AlternateUnit) return ((AlternateUnit<?>) unit).getSymbol();
+            if (unit instanceof BaseUnit) return unit.getSymbol();
+            if (unit instanceof AlternateUnit) return unit.getSymbol();
             if (unit instanceof TransformedUnit) {
                 TransformedUnit<?> tfmUnit = (TransformedUnit<?>) unit;
                 Unit<?> baseUnit = tfmUnit.getParentUnit();

@@ -24,7 +24,7 @@ import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import org.geotools.measure.Units;
 import org.geotools.referencing.wkt.GeoToolsCRSUnitFormat.BaseGT2Format;
-import tec.uom.se.unit.TransformedUnit;
+import tech.units.indriya.unit.TransformedUnit;
 
 /**
  * UnitFormat configured to parse units. Since usually we don't know the citation in use for a
