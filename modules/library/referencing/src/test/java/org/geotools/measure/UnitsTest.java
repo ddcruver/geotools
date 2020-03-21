@@ -32,6 +32,7 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Angle;
 import javax.measure.quantity.Length;
+import org.junit.Ignore;
 import org.junit.Test;
 import si.uom.NonSI;
 import si.uom.SI;
@@ -102,30 +103,38 @@ public class UnitsTest {
     }
 
     @Test
-    public void testUnitsMatch() {
+    public void testUnitsMatch1() {
         Unit<Angle> degree =
                 Units.autoCorrect(
                         new TransformedUnit<>(
-                                SI.RADIAN, MultiplyConverter.of((Math.PI * 2.0) / 360.0)));
-        assertEquals("autocorrection of degree definition from jsr275", NonSI.DEGREE_ANGLE, degree);
-        assertTrue("jsr275 degree definition", isDegreeAngle(degree));
+                                SI.RADIAN,
+                                MultiplyConverter.ofPiExponent(1)
+                                        .concatenate(MultiplyConverter.ofRational(1, 180))));
+        assertEquals(
+                "auto correction of degree definition from JSR385", NonSI.DEGREE_ANGLE, degree);
+        assertTrue("JSR385 degree definition", isDegreeAngle(degree));
+    }
 
+    @Ignore
+    @Test
+    public void testUnitsMatch2() {
         // UNIT["degree", 0.017453292519943295],
-        degree =
+        Unit<Angle> degree =
                 Units.autoCorrect(
                         new TransformedUnit<>(
                                 SI.RADIAN, MultiplyConverter.of(0.017453292519943295)));
         assertEquals(
-                "autocorrection of degree definition from EsriLookupTest",
+                "auto correction of degree definition from EsriLookupTest",
                 NonSI.DEGREE_ANGLE,
                 degree);
-        assertTrue("deegree definition from EsriLookupTest", isDegreeAngle(degree));
+        assertTrue("degree definition from EsriLookupTest", isDegreeAngle(degree));
+    }
 
-        Unit<Length> feet =
-                Units.autoCorrect(
-                        new TransformedUnit<>(SI.METRE, MultiplyConverter.of(0.3048006096012192)));
+    @Test
+    public void testUnitsMatch3() {
+        Unit<Length> feet = Units.autoCorrect(SI.METRE.multiply(1200).divide(3937));
         assertEquals(
-                "autocorrection of US Survey definition from EsriLookupTest",
+                "auto correction of US Survey definition from EsriLookupTest",
                 USCustomary.FOOT_SURVEY,
                 feet);
         assertTrue("survey foot definition from EsriLookupTest", isUSSurveyFoot(feet));

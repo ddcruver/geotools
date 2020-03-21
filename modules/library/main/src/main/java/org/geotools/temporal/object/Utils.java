@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 import javax.measure.Unit;
-import org.geotools.measure.Units;
+
 import org.geotools.temporal.reference.DefaultTemporalCoordinateSystem;
 import org.opengis.temporal.CalendarDate;
 import org.opengis.temporal.DateAndTime;
@@ -33,6 +33,7 @@ import org.opengis.temporal.OrdinalPosition;
 import org.opengis.temporal.TemporalCoordinate;
 import org.opengis.temporal.TemporalCoordinateSystem;
 import si.uom.SI;
+import tech.units.indriya.unit.Units;
 
 /**
  * This is a tool class to convert DateTime from ISO8601 to Date object.
@@ -373,31 +374,31 @@ public class Utils {
         long mills = duration_.getTimeInMillis();
         long temp = mills / yearMS;
         if (temp >= 1) {
-            return SI.YEAR;
+            return Units.YEAR;
         }
         temp = mills / monthMS;
         if (temp >= 1) {
-            return Units.MONTH;
+            return Units.MINUTE;
         }
         temp = mills / weekMS;
         if (temp >= 1) {
-            return SI.WEEK;
+            return Units.WEEK;
         }
         temp = mills / dayMS;
         if (temp >= 1) {
-            return SI.DAY;
+            return Units.DAY;
         }
         temp = mills / hourMS;
         if (temp >= 1) {
-            return SI.HOUR;
+            return Units.HOUR;
         }
         temp = mills / minMS;
         if (temp >= 1) {
-            return SI.MINUTE;
+            return Units.MINUTE;
         }
         temp = mills / secondMS;
         if (temp >= 1) {
-            return SI.SECOND;
+            return Units.SECOND;
         }
         return null;
     }

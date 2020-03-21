@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -121,7 +122,7 @@ public class NetCDFUnitFormat {
                             return super.put(key, value);
                         }
                     };
-            props.load(new InputStreamReader(is, Charset.forName("UTF-8")));
+            props.load(new InputStreamReader(is, StandardCharsets.UTF_8));
             return result;
         } catch (IOException e) {
             throw new RuntimeException(

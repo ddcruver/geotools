@@ -32,25 +32,44 @@ import org.geotools.util.GeoToolsUnitFormat;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
+import tech.units.indriya.AbstractSystemOfUnits;
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
 import tech.units.indriya.unit.TransformedUnit;
 
 /**
- * A set of units to use in addition of {@link si.uom.SI} and {@link si.uom.NonSI}.
+ * A set of units to use in addition of {@link tech.units.indriya.unit.Units}, {@link SI} and {@link USCustomary}.
  *
  * @since 2.1
  * @version $Id$
  * @author Martin Desruisseaux (IRD)
  */
-public final class Units {
+public final class Units extends AbstractSystemOfUnits {
+    /** The singleton instance. */
+    private static final Units INSTANCE = new Units();
+
     /** Do not allows instantiation of this class. */
     private Units() {}
+
+    /**
+     * Returns the singleton instance of this class.
+     *
+     * @return the geotools units instance.
+     */
+    public static Units getInstance() {
+        return INSTANCE;
+    }
+
+    @Override
+    public String getName() {
+        return "GeoToolsUnits";
+    }
+
     /** Length of <code>1/72</code> of a {@link USCustomary#INCH} */
-    public static final Unit<Length> PIXEL = USCustomary.INCH.divide(72);
+    public static final Unit<Length> PIXEL = addUnit(USCustomary.INCH.divide(72), "Pixel", "pixel");
 
     /** Time duration of <code>1/12</code> of a {@link SI#YEAR}. */
-    public static final Unit<Time> MONTH = SI.YEAR.divide(12);
+    public static final Unit<Time> MONTH = addUnit(SI.YEAR.divide(12), "Month", "month");
 
     /**
      * Pseudo-unit for sexagesimal degree. Numbers in this pseudo-unit has the following format:
@@ -84,7 +103,7 @@ public final class Units {
                     .asType(Angle.class);
 
     /** Parts per million. */
-    public static final Unit<Dimensionless> PPM = AbstractUnit.ONE.multiply(1E-6);
+    public static final Unit<Dimensionless> PPM = addUnit(AbstractUnit.ONE.multiply(1E-6));
 
     static final UnitFormat format = SimpleUnitFormat.getInstance();
 
@@ -152,9 +171,9 @@ public final class Units {
 
     /**
      * Returns an equivalent unit instance based on the provided unit. First, it tries to get one of
-     * the reference units defined in the JSR363 implementation in use. Units are considered
-     * equivalent if the {@link Units#equals(Unit, Unit)} method returns true. If no equivalent
-     * reference unit is defined, it returns the provided unit.
+     * the reference units defined in the JSR385 implementation in use. Units are considered
+     * equivalent if the {@link Units#equals(Unit, Unit)} method returns true. If no
+     * equivalent reference unit is defined, it returns the provided unit.
      */
     @SuppressWarnings("unchecked")
     public static <Q extends Quantity<Q>> Unit<Q> autoCorrect(Unit<Q> unit) {
@@ -228,5 +247,87 @@ public final class Units {
      */
     public static Unit<?> parseUnit(String name) {
         return Units.autoCorrect(DefaultUnitParser.getInstance().parse(name));
+    }
+
+    /**
+     * Adds a new unit not mapped to any specified quantity type.
+     *
+     * @param unit the unit being added.
+     * @return <code>unit</code>.
+     */
+    private static <U extends Unit<?>> U addUnit(U unit) {
+        INSTANCE.units.add(unit);
+        return unit;
+    }
+
+    /**
+     * Adds a new unit not mapped to any specified quantity type and puts a text as symbol or label.
+     *
+     * @param unit the unit being added.
+     * @param name the string to use as name
+     * @param text the string to use as label or symbol
+     * @param isLabel if the string should be used as a label or not
+     * @return <code>unit</code>.
+     */
+    private static <U extends Unit<?>> U addUnit(
+            U unit, String name, String text, boolean isLabel) {
+        if (isLabel) {
+            SimpleUnitFormat.getInstance().label(unit, text);
+        }
+        if (name != null && unit instanceof AbstractUnit) {
+            return Helper.addUnit(INSTANCE.units, unit, name);
+        } else {
+            INSTANCE.units.add(unit);
+        }
+        return unit;
+    }
+
+    /**
+     * Adds a new unit not mapped to any specified quantity type and puts a text as symbol or label.
+     *
+     * @param unit the unit being added.
+     * @param name the string to use as name
+     * @param label the string to use as label
+     * @return <code>unit</code>.
+     */
+    private static <U extends Unit<?>> U addUnit(U unit, String name, String label) {
+        return addUnit(unit, name, label, true);
+    }
+
+    /**
+     * Adds a new unit not mapped to any specified quantity type and puts a text as symbol or label.
+     *
+     * @param unit the unit being added.
+     * @param text the string to use as label or symbol
+     * @param isLabel if the string should be used as a label or not
+     * @return <code>unit</code>.
+     */
+    private static <U extends Unit<?>> U addUnit(U unit, String text, boolean isLabel) {
+        return addUnit(unit, null, text, isLabel);
+    }
+
+    /**
+     * Adds a new unit not mapped to any specified quantity type and puts a text as label.
+     *
+     * @param unit the unit being added.
+     * @param text the string to use as label or symbol
+     * @return <code>unit</code>.
+     */
+    private static <U extends Unit<?>> U addUnit(U unit, String text) {
+        return addUnit(unit, null, text, true);
+    }
+
+    /**
+     * Adds a new unit and maps it to the specified quantity type.
+     *
+     * @param unit the unit being added.
+     * @param type the quantity type.
+     * @return <code>unit</code>.
+     */
+    private static <U extends AbstractUnit<?>> U addUnit(
+            U unit, Class<? extends Quantity<?>> type) {
+        INSTANCE.units.add(unit);
+        INSTANCE.quantityToUnit.put(type, unit);
+        return unit;
     }
 }

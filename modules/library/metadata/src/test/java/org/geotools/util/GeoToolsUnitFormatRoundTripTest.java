@@ -45,6 +45,7 @@ public class GeoToolsUnitFormatRoundTripTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(
                 new Object[][] {
+                    {GRAM},
                     {GRAM.divide(1_000_000)},
                     {GRAM.divide(1_000_000).divide(METRE.pow(3))},
                     {GRAM.divide(1_000_000_000).divide(METRE.pow(3))},
@@ -87,7 +88,8 @@ public class GeoToolsUnitFormatRoundTripTest {
                     {METRE.pow(2).multiply(SECOND.pow(-1))},
                     {KILOGRAM.multiply(METRE.pow(-2))},
                     {MOLE.multiply(METRE.pow(-2))},
-                    {SECOND.pow(-1).multiply(METRE.pow(-3))},
+                    {SECOND.multiply(METRE.pow(-3))},
+                    {METRE.multiply(SECOND.pow(-3))},
                     {GRAM.multiply(KILOGRAM.pow(-1))},
                     {PASCAL.multiply(METRE)},
                     {WATT.multiply(METRE.pow(-2))},

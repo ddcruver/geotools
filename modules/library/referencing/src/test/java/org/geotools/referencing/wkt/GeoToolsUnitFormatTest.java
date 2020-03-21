@@ -44,8 +44,8 @@ public class GeoToolsUnitFormatTest {
      */
     @Test
     public void testFormatUnitOfQAppendable() throws IOException {
-        doTestNotModifiedUnits(SI.CELSIUS, epsgUnitFormat);
-        doTestNotModifiedUnits(SI.CELSIUS, esriUnitFormat);
+        doTestNotModifiedUnits(SI.KELVIN, epsgUnitFormat);
+        doTestNotModifiedUnits(SI.KELVIN, esriUnitFormat);
     }
     /**
      * Test ESRI representation of {@link USCustomary#FOOT_SURVEY) for formatting and parsing.

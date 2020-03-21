@@ -18,6 +18,8 @@ package org.geotools.styling;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Length;
+
+import org.geotools.measure.Units;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
 
@@ -29,7 +31,7 @@ import systems.uom.common.USCustomary;
 public enum UomOgcMapping {
     METRE(SI.METRE, "http://www.opengeospatial.org/se/units/metre"),
     FOOT(USCustomary.FOOT, "http://www.opengeospatial.org/se/units/foot"),
-    PIXEL(org.geotools.measure.Units.PIXEL, "http://www.opengeospatial.org/se/units/pixel");
+    PIXEL(Units.PIXEL, "http://www.opengeospatial.org/se/units/pixel");
 
     private String seString;
 
