@@ -198,8 +198,6 @@ public final class Units extends AbstractSystemOfUnits {
                     && unit2 instanceof TransformedUnit<?>) {
                 TransformedUnit<?> tunit1 = (TransformedUnit<?>) unit1;
                 TransformedUnit<?> tunit2 = (TransformedUnit<?>) unit2;
-
-                // return tunit1.isEquivalentTo((Unit<?>) tunit2);
                 if (unit1.getSystemUnit().equals(unit2.getSystemUnit())) {
                     try {
                         float factor =
