@@ -35,7 +35,7 @@ import tech.units.indriya.function.AbstractConverter;
  */
 class SexagesimalConverter extends AbstractConverter {
     /** Serial number for compatibility with different versions. */
-    private static final long serialVersionUID = 3873494343412121773L;
+    private static final long serialVersionUID = -2663951106460584999L;
 
     /** Small tolerance factor for rounding errors. */
     private static final double EPS = 1E-8;
@@ -194,7 +194,7 @@ class SexagesimalConverter extends AbstractConverter {
     /** The inverse of {@link SexagesimalConverter}. */
     private static final class Inverse extends SexagesimalConverter {
         /** Serial number for compatibility with different versions. */
-        private static final long serialVersionUID = -7171869900634417819L;
+        private static final long serialVersionUID = -7145237719599612406L;
 
         /** Constructs a converter. */
         public Inverse(final SexagesimalConverter inverse) {
